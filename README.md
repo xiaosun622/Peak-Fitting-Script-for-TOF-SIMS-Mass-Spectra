@@ -4,7 +4,7 @@
 
 This Jupyter Notebook-based tool is designed for interactive peak fitting of FIB TOF-SIMS and other mass spectrometry data. It supports Gaussian, Lorentzian, and PseudoVoigt models with optional baseline correction, smoothing, and default settings on uranium isotope ratio analysis.
 
-**Current Version:** 1.4.6
+**Current Version:** 1.5.7
 
 **Author:** Xiao Sun [https://github.com/xiaosun622]
 
