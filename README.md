@@ -69,19 +69,12 @@ Each subplot includes:
 ### 9. Calculate isotope ratios
 For uranium isotopes (e.g. 234U, 235U, 238U), the ratio is calculated as:
 
-```math
-\text{Ratio} = \frac{\text{Area}_{235}}{\text{Area}_{234} + \text{Area}_{235} + \text{Area}_{238}}
+For uranium isotopes (234U, 235U, 238U), the ratio is:
 
-
-## Requirements
-
-Python 3.7+
-
-pandas, numpy, matplotlib, scipy, lmfit, ipywidgets
-
-Install dependencies:
+Ratio = Area235 / (Area234 + Area235 + Area238)
 
 ## Terminology
+
 | Term              | Meaning                                                         |
 | ----------------- | --------------------------------------------------------------- |
 | Fitting deviation | Difference between corrected data and model fit                 |
@@ -89,5 +82,20 @@ Install dependencies:
 | Best fit          | Model prediction using optimised parameters                     |
 | R²                | Coefficient of determination, closer to 1 indicates better fit  |
 
+## Requirements
 
+- Python 3.7+
+- pandas
+- numpy
+- matplotlib
+- scipy
+- lmfit
+- ipywidgets
+
+
+
+
+### Install dependencies
+
+```bash
 pip install pandas numpy matplotlib scipy lmfit ipywidgets
