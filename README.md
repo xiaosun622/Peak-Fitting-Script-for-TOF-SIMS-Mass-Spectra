@@ -71,3 +71,23 @@ For uranium isotopes (e.g. 234U, 235U, 238U), the ratio is calculated as:
 
 ```math
 \text{Ratio} = \frac{\text{Area}_{235}}{\text{Area}_{234} + \text{Area}_{235} + \text{Area}_{238}}
+
+
+## Requirements
+
+Python 3.7+
+
+pandas, numpy, matplotlib, scipy, lmfit, ipywidgets
+
+Install dependencies:
+
+## Terminology
+| Term              | Meaning                                                         |
+| ----------------- | --------------------------------------------------------------- |
+| Fitting deviation | Difference between corrected data and model fit                 |
+| Baseline          | Estimated background under the peak (subtracted before fitting) |
+| Best fit          | Model prediction using optimised parameters                     |
+| R²                | Coefficient of determination, closer to 1 indicates better fit  |
+
+
+pip install pandas numpy matplotlib scipy lmfit ipywidgets
