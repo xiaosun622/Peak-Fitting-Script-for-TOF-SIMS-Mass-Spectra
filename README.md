@@ -1,80 +1,73 @@
-Interactive Peak Fitting Tool for FIB TOF-SIMS / Mass Spectra
-Overview
-This Jupyter Notebook-based tool is designed for interactive peak fitting of FIB TOF-SIMS and other mass spectrometry data. It supports Gaussian, Lorentzian, and PseudoVoigt models with optional baseline correction, smoothing, and default settings on uranium isotope ratio analysis.
+# Interactive Peak Fitting Tool for FIB TOF-SIMS and Mass Spectra
 
-Current Version: 1.6.4 (234U included, particle region only)
+## Overview
 
-Author: Xiao Sun [https://github.com/xiaosun622]
+This Jupyter Notebook-based tool provides an interactive workflow for peak fitting of **FIB TOF-SIMS** and other mass spectrometry spectra. It supports **Gaussian**, **Lorentzian**, and **PseudoVoigt** models, with optional **baseline correction** and **Savitzky–Golay smoothing**, and includes default settings for **uranium isotope ratio** analysis.
 
-Workflow: Step-by-Step Procedure
-1. Load Spectrum File
-Reads a tab-delimited .txt file.
+- **Current version:** 1.6.4 (234U included, particle region only)  
+- **Author:** Xiao Sun (https://github.com/xiaosun622)
 
-Expected columns:
+---
 
-mass/charge (m/Q) (x-axis)
-Total (cts/TOF-Extraction) (intensity)
-2. Apply Smoothing (Optional)
-Savitzky–Golay smoothing filter reduces noise while preserving peak shape.
+## Workflow
 
-Adjustable parameters:
+### 1. Load spectrum file
+Reads a tab-delimited `.txt` file.
 
-Smooth Win: Window size
-Polyorder: Polynomial order used in smoothing
-3. Define Peak Regions
-User inputs peak center and range width (±) for each ion.
-Regions are defined as: center ± range_width
-4. Baseline Correction (if enabled)
-Options:
+**Expected columns**
+- `mass/charge (m/Q)` (x-axis)
+- `Total (cts/TOF-Extraction)` (intensity)
 
-average: Flat baseline using predicted intensity ± offset
-linear: Line fit to surrounding regions
-polynomial: 2nd-order polynomial fit
-This background is subtracted from the signal to isolate the peak.
+### 2. Apply smoothing (optional)
+Uses a Savitzky–Golay smoothing filter to reduce noise while preserving peak shape.
 
-5. Select Fit Model
-Choose between symmetric or asymmetric peak shapes:
+**Adjustable parameters**
+- **Smooth Win:** window size (number of points)
+- **Polyorder:** polynomial order used in smoothing
 
-Gaussian
-Lorentzian
-PseudoVoigt (or Voigt for asymmetric cases)
-6. Fit the Peak
-The fitting is applied to the baseline-corrected signal.
-Initial parameters are estimated (center, amplitude, sigma).
-The model is optimized to minimize the squared difference between corrected data and prediction.
-7. Extract Results
-From the fit result:
+### 3. Define peak regions
+For each ion, set a peak centre and range width (±).
 
-Best-fit curve (model_prediction)
-Fitting Deviation (data - prediction)
-R² (goodness of fit)
-Area (peak amplitude)
-8. Plot Outputs
+Peak region is defined as:
+
+- `centre ± range_width`
+
+### 4. Baseline correction (optional)
+If enabled, an estimated background is subtracted before fitting.
+
+**Baseline options**
+- **average:** flat baseline using predicted intensity at `centre ± offset`
+- **linear:** line fit to surrounding baseline regions
+- **polynomial:** 2nd-order polynomial fit
+
+### 5. Select fit model
+Choose a symmetric or asymmetric peak shape:
+
+- Gaussian
+- Lorentzian
+- PseudoVoigt (or Voigt for asymmetric cases)
+
+### 6. Fit the peak
+The model is fitted to the baseline-corrected signal. Initial parameters are estimated (centre, amplitude, sigma), and then optimised to minimise the squared error.
+
+### 7. Extract results
+For each fitted peak, the tool reports:
+
+- **Best-fit curve** (model prediction)
+- **Fitting deviation** (data minus prediction)
+- **R²** (goodness of fit)
+- **Area** (peak amplitude from the model fit)
+
+### 8. Plot outputs
 Each subplot includes:
 
-Smoothed signal
-Corrected signal
-Model fit
-Fitting Deviation (formerly “Residuals”)
-9. Calculate Isotope Ratios
-For isotopes (e.g. 234U, 235U, 238U), the ratio is:
+- Smoothed signal
+- Corrected signal (if baseline correction is enabled)
+- Model fit
+- Fitting deviation (formerly “Residuals”)
 
-math
+### 9. Calculate isotope ratios
+For uranium isotopes (e.g. 234U, 235U, 238U), the ratio is calculated as:
+
+```math
 \text{Ratio} = \frac{\text{Area}_{235}}{\text{Area}_{234} + \text{Area}_{235} + \text{Area}_{238}}
-10. Save Outputs (Manual Trigger)
-Press "Save Results" after fitting to export:
-
-A PNG image of all plots
-A CSV summary table with areas, R², and isotope ratios
-Terminology
-Term	Meaning
-Fitting Deviation	Difference between corrected data and model fit
-Baseline	Estimated background under the peak (subtracted before fitting)
-Best Fit	Model prediction using optimized parameters
-R²	Coefficient of determination; closer to 1 means better fit
-Requirements
-Python 3.7+
-pandas, numpy, matplotlib, scipy, lmfit, ipywidgets
-Install via pip:
-
-pip install pandas numpy matplotlib scipy lmfit ipywidgets
